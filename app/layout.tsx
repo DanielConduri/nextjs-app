@@ -16,7 +16,7 @@ export default function RootLayout({
       {/* el chilren es el page.tsx */}
       {children} 
       <footer className='py-10 flex justify-center'>
-        Hecho con amor por vercel
+        Hecho con amor por vercel :)
       </footer>
      
       </body> 
