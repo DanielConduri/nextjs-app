@@ -1,4 +1,9 @@
 import { sql } from '@vercel/postgres';
+// import { createPool } from '@vercel/postgres';
+
+// const pool = createPool({
+//   connectionString: process.env.POSTGRES_URL, // Asegúrate de que esta variable esté correctamente configurada
+// });
 import {
   CustomerField,
   CustomersTableType,
@@ -9,8 +14,6 @@ import {
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
-
-
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
@@ -117,7 +120,7 @@ export async function fetchFilteredInvoices(
       ORDER BY invoices.date DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
-
+    //console.log('invoices.rows', invoices.rows)
     return invoices.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -147,6 +150,7 @@ export async function fetchInvoicesPages(query: string) {
 }
 
 export async function fetchInvoiceById(id: string) {
+  console.log('id', id)
   try {
     const data = await sql<InvoiceForm>`
       SELECT

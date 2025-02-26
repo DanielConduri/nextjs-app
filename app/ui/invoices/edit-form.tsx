@@ -18,6 +18,7 @@ export default function EditInvoiceForm({
   customers: CustomerField[];
 }) {
   const updateInvoiceWithId = updateInvoice.bind(null, invoice.id);
+  console.log('updateInvoiceWithId', updateInvoiceWithId)
   return (
     <form action={updateInvoiceWithId}>
       {/* <input type="hidden" name="id" value={invoice.id} /> which is not ideal for sensitive data like IDs.*/} 

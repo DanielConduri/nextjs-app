@@ -1,0 +1,43 @@
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+import { cookies } from 'next/headers';
+ 
+// This function can be marked `async` if using `await` inside
+export function middleware(request: NextRequest) {
+ let cookie = request.cookies.get('nextjs')
+ 
+  console.log(cookie) // => { name: 'nextjs', value: 'fast', Path: '/' }
+  const allCookies = request.cookies.getAll()
+  console.log(allCookies) // => [{ name: 'nextjs', value: 'fast' }]
+
+  request.cookies.has('nextjs') // => true
+  request.cookies.delete('nextjs')
+  request.cookies.has('nextjs') // => false
+  
+
+
+
+// // Verifica si la cookie de sesión existe
+// const sessionToken = cookies().get('authjs.session-token')?.value;
+// // Protege las rutas del dashboard
+//   const protectedRoutes = ['/dashboard'];
+//   const path = request.nextUrl.pathname;
+
+//   if (protectedRoutes.includes(path)) {
+//     if (!sessionToken) {
+//       // Si no hay sesión, redirige a la página de login
+//       return NextResponse.redirect(new URL('/', request.nextUrl));
+//     }
+//   }
+
+
+  //return NextResponse.redirect(new URL('/login', request.url))
+  //return NextResponse.next();
+}
+ 
+// See "Matching Paths" below to learn more
+export const config = {
+  //matcher: '/about/:path*',
+  matcher: ['/dashboard'], // Protege solo las rutas de dashboard
+
+}
